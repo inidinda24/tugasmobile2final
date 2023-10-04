@@ -127,14 +127,6 @@ class _halamanloginState extends State<halamanlogin> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Forgot the password?',
-                style: TextStyle(color: Colors.red, fontFamily: 'Mooli'),
-              ),
-            )
           ],
         ),
       ),
