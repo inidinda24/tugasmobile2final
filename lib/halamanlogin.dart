@@ -31,14 +31,14 @@ class _halamanloginState extends State<halamanlogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Main Page",
-          style: TextStyle(
-              fontFamily: 'Mooli', fontSize: 18.0, color: Colors.white),
-        ),
-        backgroundColor: Colors.teal,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     "Main Page",
+      //     style: TextStyle(
+      //         fontFamily: 'Mooli', fontSize: 18.0, color: Colors.white),
+      //   ),
+      //   backgroundColor: Colors.teal,
+      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
