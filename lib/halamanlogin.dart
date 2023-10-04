@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_mobile2/halamanutama.dart';
 
-class halamanlogin extends StatelessWidget {
+class halamanlogin extends StatefulWidget {
   const halamanlogin({super.key});
 
+  @override
+  State<halamanlogin> createState() => _halamanloginState();
+}
+
+class _halamanloginState extends State<halamanlogin> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLoginFailed = false;
+
+  // Username dan password yang benar
+  final String correctUsername = "user";
+  final String correctPassword = "123";
+
+  // Fungsi saat menekan tombol login
+  void _login() {
+    if (usernameController.text == correctUsername &&
+        passwordController.text == correctPassword) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> halamanutama()));
+    } else {
+      setState(() {
+        isLoginFailed = true;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +71,7 @@ class halamanlogin extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(16.0),
                     child: TextFormField(
-                      //controller: usernameController,
+                      controller: usernameController,
                       decoration: InputDecoration(
                         labelText: 'Username',
                         floatingLabelStyle:
@@ -63,7 +87,7 @@ class halamanlogin extends StatelessWidget {
                     padding: EdgeInsets.all(16.0),
                     child: TextFormField(
                       obscureText: true,
-                      //controller: passwordController,
+                      controller: passwordController,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         floatingLabelStyle:
@@ -80,12 +104,7 @@ class halamanlogin extends StatelessWidget {
                       primary: Colors
                           .teal, // Atur warna latar belakang tombol menjadi hijau
                     ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                            return halamanutama(); // masuk ke page 1
-                          }));
-                    },
+                    onPressed: _login,
                     child: Text(
                       'Masuk',
                       style: TextStyle(
@@ -94,6 +113,17 @@ class halamanlogin extends StatelessWidget {
                           fontSize: 11.0),
                     ),
                   ),
+                  if (isLoginFailed)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Username atau password salah!',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
