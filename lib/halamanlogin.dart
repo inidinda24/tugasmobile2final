@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_mobile2/halamanutama.dart';
 
 class halamanlogin extends StatefulWidget {
@@ -31,14 +32,6 @@ class _halamanloginState extends State<halamanlogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(
-      //     "Main Page",
-      //     style: TextStyle(
-      //         fontFamily: 'Mooli', fontSize: 18.0, color: Colors.white),
-      //   ),
-      //   backgroundColor: Colors.teal,
-      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +68,7 @@ class _halamanloginState extends State<halamanlogin> {
                       decoration: InputDecoration(
                         labelText: 'Username',
                         floatingLabelStyle:
-                        TextStyle(color: Colors.teal, fontFamily: 'Mooli'),
+                            GoogleFonts.lexend(color: Colors.teal),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
                             const BorderSide(color: Colors.teal, width: 1),
@@ -90,8 +83,10 @@ class _halamanloginState extends State<halamanlogin> {
                       controller: passwordController,
                       decoration: InputDecoration(
                         labelText: 'Password',
+                        labelStyle:
+                          GoogleFonts.lexend(),
                         floatingLabelStyle:
-                        TextStyle(color: Colors.teal, fontFamily: 'Mooli'),
+                          GoogleFonts.lexend(color: Colors.teal),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
                             const BorderSide(color: Colors.teal, width: 1),
@@ -107,10 +102,10 @@ class _halamanloginState extends State<halamanlogin> {
                     onPressed: _login,
                     child: Text(
                       'Masuk',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Mooli',
-                          fontSize: 11.0),
+                      style:GoogleFonts.lexend(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white
+                      )
                     ),
                   ),
                   if (isLoginFailed)

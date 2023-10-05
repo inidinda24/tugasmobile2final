@@ -34,16 +34,18 @@ class _halamanutamaState extends State<halamanutama> {
         ],
         backgroundColor: Colors.teal,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Visibility(
-                visible: (tampilanDefault) ? true : false, child: menuUtama()),
-            Visibility(
-                visible: (tampilanDefault) ? false : true,
-                child: menuBantuan()),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Visibility(
+                  visible: (tampilanDefault) ? true : false, child: menuUtama()),
+              Visibility(
+                  visible: (tampilanDefault) ? false : true,
+                  child: menuBantuan()),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

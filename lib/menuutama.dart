@@ -31,6 +31,56 @@ class _Item1State extends State<Item1> {
     }
   }
 
+  void _toggleFavorite() {
+    setState(() {
+      Suka = !Suka;
+      if (Suka) {
+        // Menampilkan pop-up ketika menyukai selama 2 detik
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              alignment: Alignment.center,
+              content: Text('Anda menyukai Dinda',
+              style: TextStyle(
+                fontFamily: "Mooli",
+                color: Colors.teal,
+                fontWeight: FontWeight.bold,
+              ),
+              ),
+            );
+          },
+        );
+
+        // Menutup alert setelah 2 detik
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pop();
+        });
+      } else {
+        // Menampilkan pop-up ketika tidak menyukai selama 2 detik
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              content: Text('Anda tidak menyukai Dinda',
+                style: TextStyle(
+                  fontFamily: "Mooli",
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          },
+        );
+
+        // Menutup alert setelah 2 detik
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pop();
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,13 +137,7 @@ class _Item1State extends State<Item1> {
                   )),
               IconButton(
                   onPressed: () {
-                    setState(() {
-                      if (Suka == false) {
-                        Suka = true;
-                      } else if (Suka == true) {
-                        Suka = false;
-                      }
-                    });
+                    _toggleFavorite();
                   },
                   icon: Icon(
                     (Suka) ? Icons.favorite : Icons.favorite_border,
@@ -123,6 +167,57 @@ class _Item2State extends State<Item2> {
     if (!await launchUrl(_url)) {
       throw Exception("Gagal membuka url : $_url");
     }
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      Suka = !Suka;
+      if (Suka) {
+        // Menampilkan pop-up ketika menyukai selama 2 detik
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              alignment: Alignment.center,
+              content: Text('Anda menyukai Mifta',
+                style: TextStyle(
+                  fontFamily: "Mooli",
+                  color: Colors.teal,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          },
+        );
+
+        // Menutup alert setelah 2 detik
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pop();
+        });
+      } else {
+        // Menampilkan pop-up ketika tidak menyukai selama 2 detik
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              alignment: Alignment.center,
+              content: Text('Anda tidak menyukai Mifta',
+                style: TextStyle(
+                  fontFamily: "Mooli",
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          },
+        );
+
+        // Menutup alert setelah 2 detik
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pop();
+        });
+      }
+    });
   }
 
   @override
@@ -181,13 +276,7 @@ class _Item2State extends State<Item2> {
                   )),
               IconButton(
                   onPressed: () {
-                    setState(() {
-                      if (Suka == false) {
-                        Suka = true;
-                      } else if (Suka == true) {
-                        Suka = false;
-                      }
-                    });
+                    _toggleFavorite();
                   },
                   icon: Icon(
                     (Suka) ? Icons.favorite : Icons.favorite_border,
@@ -217,6 +306,57 @@ class _Item3State extends State<Item3> {
     if (!await launchUrl(_url)) {
       throw Exception("Gagal membuka url : $_url");
     }
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      Suka = !Suka;
+      if (Suka) {
+        // Menampilkan pop-up ketika menyukai selama 2 detik
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              alignment: Alignment.center,
+              content: Text('Anda menyukai Faiz',
+                style: TextStyle(
+                  fontFamily: "Mooli",
+                  color: Colors.teal,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          },
+        );
+
+        // Menutup alert setelah 2 detik
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pop();
+        });
+      } else {
+        // Menampilkan pop-up ketika tidak menyukai selama 2 detik
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              alignment: Alignment.center,
+              content: Text('Anda tidak menyukai Faiz',
+                style: TextStyle(
+                  fontFamily: "Mooli",
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          },
+        );
+
+        // Menutup alert setelah 2 detik
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.of(context).pop();
+        });
+      }
+    });
   }
 
   @override
@@ -275,13 +415,7 @@ class _Item3State extends State<Item3> {
                   )),
               IconButton(
                   onPressed: () {
-                    setState(() {
-                      if (Suka == false) {
-                        Suka = true;
-                      } else if (Suka == true) {
-                        Suka = false;
-                      }
-                    });
+                    _toggleFavorite();
                   },
                   icon: Icon(
                     (Suka) ? Icons.favorite : Icons.favorite_border,
