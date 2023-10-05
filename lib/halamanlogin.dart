@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tugas_mobile2/halamanutama.dart';
+import 'package:tugas_mobile2/menuutamafinal.dart';
 
 class halamanlogin extends StatefulWidget {
   const halamanlogin({super.key});
@@ -22,7 +22,7 @@ class _halamanloginState extends State<halamanlogin> {
   void _login() {
     if (usernameController.text == correctUsername &&
         passwordController.text == correctPassword) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> halamanutama()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=> menuUtamaFinal()));
     } else {
       setState(() {
         isLoginFailed = true;
