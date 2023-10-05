@@ -18,23 +18,31 @@ class _halamanutamaState extends State<halamanutama> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "My Stopwatch",
-          style: TextStyle(color: Colors.white),
+          "MyStopwatch",
+          style:
+              TextStyle(fontFamily: "Mooli", color: Colors.white, fontSize: 25),
         ),
+        actions: [
+          Visibility(
+            visible: (tampilanDefault)? false:true,
+              child: IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () {
+                _logOut(context);
+            },
+          ))
+        ],
         backgroundColor: Colors.teal,
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Visibility(
-              visible: (tampilanDefault) ? true : false,
-              child: menuUtama()
-            ),
+                visible: (tampilanDefault) ? true : false, child: menuUtama()),
             Visibility(
                 visible: (tampilanDefault) ? false : true,
-                child: menuBantuan()
-            ),
+                child: menuBantuan()),
           ],
         ),
       ),
@@ -45,7 +53,7 @@ class _halamanutamaState extends State<halamanutama> {
             setState(() {
               tampilanDefault = true;
             });
-          } else if(index == 1){
+          } else if (index == 1) {
             setState(() {
               tampilanDefault = false;
             });
@@ -64,4 +72,9 @@ class _halamanutamaState extends State<halamanutama> {
       ),
     );
   }
+}
+
+void _logOut(BuildContext context) {
+  Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (BuildContext context) => halamanlogin()));
 }

@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
-
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class menuUtama extends StatefulWidget {
   const menuUtama({super.key});
@@ -11,102 +14,93 @@ class menuUtama extends StatefulWidget {
   State<menuUtama> createState() => _menuUtamaState();
 }
 
-class Item1 extends StatelessWidget {
+class Item1 extends StatefulWidget {
   const Item1({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.3, 1],
-            colors: [Color(0xffff4000),Color(0xffffcc66),]
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-              "Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold
-              )
-          ),
-          Text(
-              "Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.w600
-              )
-          ),
-        ],
-      ),
-    );
-  }
+  State<Item1> createState() => _Item1State();
 }
 
-class Item2 extends StatelessWidget {
-  const Item2({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.3, 1],
-            colors: [Color(0xff5f2c82), Color(0xff49a09d)]
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-              "Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold
-              )
-          ),
-          Text(
-              "Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.w600
-              )
-          ),
-        ],
-      ),
-    );
-  }
-}
+class _Item1State extends State<Item1> {
+  bool Suka = false;
 
-class Item3 extends StatelessWidget {
-  const Item3({Key? key}) : super(key: key);
+  Future<void> _launcher(String url) async {
+    final Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url)) {
+      throw Exception("Gagal membuka url : $_url");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.3, 1],
-            colors: [Color(0xffff4000),Color(0xffffcc66),]
-        ),
-      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Image.asset(
-            'assets/flutter_dev.png',
-            height: 180.0,
-            fit: BoxFit.cover,
+          Container(
+            height: 5,
+            width: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.blue,
+            ),
+          ),
+          SizedBox(
+            height: 35,
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: new BoxDecoration(
+              border: Border.all(
+                color: Colors.teal,
+                width: 2,
+              ),
+              shape: BoxShape.circle,
+              image: new DecorationImage(
+                image: new AssetImage('dinda.jpeg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Text("Dinda Dwi Rahmawaty",
+              style: GoogleFonts.lexend(
+                  fontSize: 18, fontWeight: FontWeight.bold)),
+          Text("124210049", style: GoogleFonts.lexend()),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    _launcher("https://www.instagram.com/dinda.drr/");
+                  },
+                  icon: Icon(
+                    Icons.camera_alt,
+                    color: Colors.teal,
+                    size: 32,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (Suka == false) {
+                        Suka = true;
+                      } else if (Suka == true) {
+                        Suka = false;
+                      }
+                    });
+                  },
+                  icon: Icon(
+                    (Suka) ? Icons.favorite : Icons.favorite_border,
+                    color: Colors.teal,
+                    size: 32,
+                  )),
+            ],
           )
         ],
       ),
@@ -114,30 +108,188 @@ class Item3 extends StatelessWidget {
   }
 }
 
-class Item4 extends StatelessWidget {
-  const Item4({Key? key}) : super(key: key);
+class Item2 extends StatefulWidget {
+  const Item2({Key? key}) : super(key: key);
+
+  @override
+  State<Item2> createState() => _Item2State();
+}
+
+class _Item2State extends State<Item2> {
+  bool Suka = false;
+
+  Future<void> _launcher(String url) async {
+    final Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url)) {
+      throw Exception("Gagal membuka url : $_url");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Text(
-              "Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold
-              )
+          Container(
+            height: 5,
+            width: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.blue,
+            ),
           ),
-          Text(
-              "Data",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.w600
-              )
+          SizedBox(
+            height: 35,
           ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: new BoxDecoration(
+              border: Border.all(
+                color: Colors.teal,
+                width: 2,
+              ),
+              shape: BoxShape.circle,
+              image: new DecorationImage(
+                image: new AssetImage('mifta.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Text("Miftakhurokhman",
+              style: GoogleFonts.lexend(
+                  fontSize: 18, fontWeight: FontWeight.bold)),
+          Text("124210058", style: GoogleFonts.lexend()),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    _launcher("https://www.instagram.com/miftakhurokhmann/");
+                  },
+                  icon: Icon(
+                    Icons.camera_alt,
+                    color: Colors.teal,
+                    size: 32,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (Suka == false) {
+                        Suka = true;
+                      } else if (Suka == true) {
+                        Suka = false;
+                      }
+                    });
+                  },
+                  icon: Icon(
+                    (Suka) ? Icons.favorite : Icons.favorite_border,
+                    color: Colors.teal,
+                    size: 32,
+                  )),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class Item3 extends StatefulWidget {
+  const Item3({Key? key}) : super(key: key);
+
+  @override
+  State<Item3> createState() => _Item3State();
+}
+
+class _Item3State extends State<Item3> {
+  bool Suka = false;
+
+  Future<void> _launcher(String url) async {
+    final Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url)) {
+      throw Exception("Gagal membuka url : $_url");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            height: 5,
+            width: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.blue,
+            ),
+          ),
+          SizedBox(
+            height: 35,
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            decoration: new BoxDecoration(
+              border: Border.all(
+                color: Colors.teal,
+                width: 2,
+              ),
+              shape: BoxShape.circle,
+              image: new DecorationImage(
+                image: new AssetImage('faiz.jpeg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Text("Faiz Rosyid Ma'ruf",
+              style: GoogleFonts.lexend(
+                  fontSize: 18, fontWeight: FontWeight.bold)),
+          Text("124210011", style: GoogleFonts.lexend()),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    _launcher("https://www.instagram.com/_faizrosyid/");
+                  },
+                  icon: Icon(
+                    Icons.camera_alt,
+                    color: Colors.teal,
+                    size: 32,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (Suka == false) {
+                        Suka = true;
+                      } else if (Suka == true) {
+                        Suka = false;
+                      }
+                    });
+                  },
+                  icon: Icon(
+                    (Suka) ? Icons.favorite : Icons.favorite_border,
+                    color: Colors.teal,
+                    size: 32,
+                  )),
+            ],
+          )
         ],
       ),
     );
@@ -145,23 +297,106 @@ class Item4 extends StatelessWidget {
 }
 
 class _menuUtamaState extends State<menuUtama> {
-  int _currentIndex=0;
+  int _currentIndex = 0;
+  List cardList = [Item1(), Item2(), Item3()];
 
-  List cardList=[
-    Item1(),
-    Item2(),
-    Item3(),
-    Item4()
-  ];
+  bool isRunning = false;
+  int totalMilliseconds = 0;
+  int pausedMilliseconds = 0; // Tambahkan variabel pausedMilliseconds
+  List<String> lapTimes = [];
+  late Ticker _ticker;
 
+  void initState() {
+    super.initState();
+    _ticker = Ticker(_onTick);
+  }
+
+  void _onTick(Duration elapsed) {
+    setState(() {
+      totalMilliseconds = elapsed.inMilliseconds +
+          pausedMilliseconds; // Tambahkan pausedMilliseconds
+    });
+  }
+
+  void startStopTimer() {
+    if (!isRunning) {
+      _ticker.start();
+      setState(() {
+        isRunning = true;
+      });
+    } else {
+      pauseTimer();
+    }
+  }
+
+  void pauseTimer() {
+    _ticker.stop();
+    setState(() {
+      isRunning = false;
+      pausedMilliseconds =
+          totalMilliseconds; // Simpan totalMilliseconds saat tombol "Pause" ditekan
+    });
+  }
+
+  void resetTimer() {
+    _ticker.stop();
+    setState(() {
+      totalMilliseconds = 0;
+      isRunning = false;
+      lapTimes.clear();
+      pausedMilliseconds =
+          0; // Atur pausedMilliseconds kembali ke 0 saat tombol "Reset" ditekan
+    });
+  }
+
+  void lapTimer() {
+    lapTimes.insert(0, formatTime(totalMilliseconds));
+    setState(() {
+      lapTimes = lapTimes;
+    });
+  }
+
+  String formatTime(int milliseconds) {
+    int hours = (milliseconds ~/ 3600000) % 24;
+    int minutes = (milliseconds ~/ 60000) % 60;
+    int seconds = (milliseconds ~/ 1000) % 60;
+    int hundreds = (milliseconds ~/ 10) % 100;
+
+    String hoursStr = hours.toString().padLeft(2, '0');
+    String minutesStr = minutes.toString().padLeft(2, '0');
+    String secondsStr = seconds.toString().padLeft(2, '0');
+    String hundredsStr = hundreds.toString().padLeft(2, '0');
+
+    return '$hoursStr:$minutesStr:$secondsStr.$hundredsStr';
+  }
+
+  void dispose() {
+    _ticker.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        SizedBox(
+          height: 15,
+        ),
+        Text(
+          "Members",
+          style: TextStyle(
+            fontFamily: 'Mooli',
+            fontSize: 30,
+            color: Colors.blue,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 15,
+        ),
         CarouselSlider(
           options: CarouselOptions(
-            height: 200.0,
+            height: 300.0,
             autoPlay: true,
             autoPlayInterval: Duration(seconds: 5),
             autoPlayAnimationDuration: Duration(milliseconds: 1000),
@@ -174,20 +409,145 @@ class _menuUtamaState extends State<menuUtama> {
               });
             },
           ),
-          items: cardList.map((card){
-            return Builder(
-                builder:(BuildContext context){
-                  return Container(
-                    height: MediaQuery.of(context).size.height*0.30,
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      color: Colors.blueAccent,
-                      child: card,
-                    ),
-                  );
-                }
-            );
+          items: cardList.map((card) {
+            return Builder(builder: (BuildContext context) {
+              return Container(
+                height: MediaQuery.of(context).size.height * 0.30,
+                width: MediaQuery.of(context).size.width,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  color: Colors.white54,
+                  child: card,
+                ),
+              );
+            });
           }).toList(),
+        ),
+        SizedBox(
+          height: 30,
+        ),
+        Text(
+          'Stopwatch',
+          style: TextStyle(
+            fontFamily: 'Mooli',
+            fontSize: 30,
+            color: Colors.blue,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        Container(
+          width: 330,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                formatTime(totalMilliseconds),
+                style: GoogleFonts.boogaloo(
+                  fontSize: 48.0,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 20.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                if (!isRunning) {
+                  startStopTimer();
+                } else {
+                  pauseTimer();
+                }
+              },
+              child: Container(
+                width: 80,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(isRunning ? 'Pause' : 'Start',
+                        style: GoogleFonts.lexend(fontSize: 18)),
+                  ],
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.teal,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+            ),
+            SizedBox(width: 5.0),
+            ElevatedButton(
+              onPressed: () {
+                resetTimer();
+              },
+              child: Container(
+                width: 80,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Reset', style: GoogleFonts.lexend(fontSize: 18)),
+                  ],
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.teal,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+            ),
+            SizedBox(width: 5.0),
+            ElevatedButton(
+              onPressed: () {
+                lapTimer();
+              },
+              child: Container(
+                width: 80,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Lap', style: GoogleFonts.lexend(fontSize: 18)),
+                  ],
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.teal,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: lapTimes
+              .asMap()
+              .map(
+                (index, lapTime) => MapEntry(
+                  index,
+                  Text(
+                    'Lap ${lapTimes.length - index}: $lapTime',
+                    // style: GoogleFonts.boogaloo(
+                    //     fontSize: 24.0, color: Colors.green),
+                  ),
+                ),
+              )
+              .values
+              .toList(),
         ),
       ],
     );
