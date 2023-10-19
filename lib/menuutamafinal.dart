@@ -14,16 +14,22 @@ class menuUtamaFinal extends StatefulWidget {
   State<menuUtamaFinal> createState() => _menuUtamaFinalState();
 }
 
-class Item1 extends StatefulWidget {
-  const Item1({Key? key}) : super(key: key);
+class ItemWidget extends StatefulWidget {
+  final int index;
+  final String? name;
+  final String? imageUrl;
+  final String? instagramUrl;
+  final String? nim;
+  final bool? suka;
+  final List<Map<String, dynamic>> carouselData;
+
+  ItemWidget({required this.index, required this.name, required this.imageUrl, required this.instagramUrl, required this.nim, required this.suka, required this.carouselData,});
 
   @override
-  State<Item1> createState() => _Item1State();
+  State<ItemWidget> createState() => _ItemWidgetState();
 }
 
-class _Item1State extends State<Item1> {
-  bool Suka = false;
-
+class _ItemWidgetState extends State<ItemWidget> {
   Future<void> _launcher(String url) async {
     final Uri _url = Uri.parse(url);
     if (!await launchUrl(_url)) {
@@ -33,15 +39,14 @@ class _Item1State extends State<Item1> {
 
   void _toggleFavorite() {
     setState(() {
-      Suka = !Suka;
-      if (Suka) {
+      if (widget.carouselData[widget.index]["suka"] == false) {
         // Menampilkan pop-up ketika menyukai selama 2 detik
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               alignment: Alignment.center,
-              content: Text('Anda menyukai Dinda',
+              content: Text('Anda menyukai ' + widget.name!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: "Mooli",
@@ -57,13 +62,15 @@ class _Item1State extends State<Item1> {
         Future.delayed(Duration(seconds: 1), () {
           Navigator.of(context).pop();
         });
+        widget.carouselData[widget.index]["suka"] = true;
       } else {
         // Menampilkan pop-up ketika tidak menyukai selama 2 detik
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              content: Text('Anda tidak menyukai Dinda',
+              alignment: Alignment.center,
+              content: Text('Anda tidak menyukai ' + widget.name!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: "Mooli",
@@ -79,367 +86,110 @@ class _Item1State extends State<Item1> {
         Future.delayed(Duration(seconds: 1), () {
           Navigator.of(context).pop();
         });
+        widget.carouselData[widget.index]["suka"] = false;
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            height: 5,
-            width: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.blue,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          height: 5,
+          width: 200,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.blue,
+          ),
+        ),
+        SizedBox(
+          height: 35,
+        ),
+        Container(
+          height: 100,
+          width: 100,
+          decoration: new BoxDecoration(
+            border: Border.all(
+              color: Colors.teal,
+              width: 2,
+            ),
+            shape: BoxShape.circle,
+            image: new DecorationImage(
+              image: new AssetImage(widget.imageUrl!),
+              fit: BoxFit.cover,
             ),
           ),
-          SizedBox(
-            height: 35,
-          ),
-          Container(
-            height: 100,
-            width: 100,
-            decoration: new BoxDecoration(
-              border: Border.all(
+        ),
+        SizedBox(
+          height: 25,
+        ),
+        Text(widget.name!,
+            style: GoogleFonts.lexend(
+                fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(widget.nim!, style: GoogleFonts.lexend()),
+        SizedBox(
+          height: 30,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              onPressed: () {
+                _launcher(widget.instagramUrl!);
+              },
+              icon: Icon(
+                Icons.camera_alt,
                 color: Colors.teal,
-                width: 2,
-              ),
-              shape: BoxShape.circle,
-              image: new DecorationImage(
-                image: new AssetImage('dinda.jpeg'),
-                fit: BoxFit.cover,
+                size: 32,
               ),
             ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Text("Dinda Dwi Rahmawaty",
-              style: GoogleFonts.lexend(
-                  fontSize: 18, fontWeight: FontWeight.bold)),
-          Text("124210049", style: GoogleFonts.lexend()),
-          SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                  onPressed: () {
-                    _launcher("https://www.instagram.com/dinda.drr/");
-                  },
-                  icon: Icon(
-                    Icons.camera_alt,
-                    color: Colors.teal,
-                    size: 32,
-                  )),
-              IconButton(
-                  onPressed: () {
-                    _toggleFavorite();
-                  },
-                  icon: Icon(
-                    (Suka) ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.teal,
-                    size: 32,
-                  )),
-            ],
-          )
-        ],
-      ),
+            IconButton(
+              onPressed: () {
+                _toggleFavorite();
+              },
+              icon: Icon(
+                (widget.carouselData[widget.index]["suka"]) ? Icons.favorite : Icons.favorite_border,
+                color: Colors.teal,
+                size: 32,
+              ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
 
-class Item2 extends StatefulWidget {
-  const Item2({Key? key}) : super(key: key);
-
-  @override
-  State<Item2> createState() => _Item2State();
-}
-
-class _Item2State extends State<Item2> {
-  bool Suka = false;
-
-  Future<void> _launcher(String url) async {
-    final Uri _url = Uri.parse(url);
-    if (!await launchUrl(_url)) {
-      throw Exception("Gagal membuka url : $_url");
-    }
-  }
-
-  void _toggleFavorite() {
-    setState(() {
-      Suka = !Suka;
-      if (Suka) {
-        // Menampilkan pop-up ketika menyukai selama 2 detik
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              alignment: Alignment.center,
-              content: Text('Anda menyukai Mifta',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "Mooli",
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          },
-        );
-
-        // Menutup alert setelah 2 detik
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.of(context).pop();
-        });
-      } else {
-        // Menampilkan pop-up ketika tidak menyukai selama 2 detik
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              alignment: Alignment.center,
-              content: Text('Anda tidak menyukai Mifta',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "Mooli",
-                  color: Colors.redAccent,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          },
-        );
-
-        // Menutup alert setelah 2 detik
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.of(context).pop();
-        });
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            height: 5,
-            width: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.blue,
-            ),
-          ),
-          SizedBox(
-            height: 35,
-          ),
-          Container(
-            height: 100,
-            width: 100,
-            decoration: new BoxDecoration(
-              border: Border.all(
-                color: Colors.teal,
-                width: 2,
-              ),
-              shape: BoxShape.circle,
-              image: new DecorationImage(
-                image: new AssetImage('mifta.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Text("Miftakhurokhman",
-              style: GoogleFonts.lexend(
-                  fontSize: 18, fontWeight: FontWeight.bold)),
-          Text("124210058", style: GoogleFonts.lexend()),
-          SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                  onPressed: () {
-                    _launcher("https://www.instagram.com/miftakhurokhmann/");
-                  },
-                  icon: Icon(
-                    Icons.camera_alt,
-                    color: Colors.teal,
-                    size: 32,
-                  )),
-              IconButton(
-                  onPressed: () {
-                    _toggleFavorite();
-                  },
-                  icon: Icon(
-                    (Suka) ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.teal,
-                    size: 32,
-                  )),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class Item3 extends StatefulWidget {
-  const Item3({Key? key}) : super(key: key);
-
-  @override
-  State<Item3> createState() => _Item3State();
-}
-
-class _Item3State extends State<Item3> {
-  bool Suka = false;
-
-  Future<void> _launcher(String url) async {
-    final Uri _url = Uri.parse(url);
-    if (!await launchUrl(_url)) {
-      throw Exception("Gagal membuka url : $_url");
-    }
-  }
-
-  void _toggleFavorite() {
-    setState(() {
-      Suka = !Suka;
-      if (Suka) {
-        // Menampilkan pop-up ketika menyukai selama 2 detik
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              alignment: Alignment.center,
-              content: Text('Anda menyukai Faiz',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "Mooli",
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          },
-        );
-
-        // Menutup alert setelah 2 detik
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.of(context).pop();
-        });
-      } else {
-        // Menampilkan pop-up ketika tidak menyukai selama 2 detik
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              alignment: Alignment.center,
-              content: Text('Anda tidak menyukai Faiz',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "Mooli",
-                  color: Colors.redAccent,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          },
-        );
-
-        // Menutup alert setelah 2 detik
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.of(context).pop();
-        });
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            height: 5,
-            width: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.blue,
-            ),
-          ),
-          SizedBox(
-            height: 35,
-          ),
-          Container(
-            height: 100,
-            width: 100,
-            decoration: new BoxDecoration(
-              border: Border.all(
-                color: Colors.teal,
-                width: 2,
-              ),
-              shape: BoxShape.circle,
-              image: new DecorationImage(
-                image: new AssetImage('faiz.jpeg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Text("Faiz Rosyid Ma'ruf",
-              style: GoogleFonts.lexend(
-                  fontSize: 18, fontWeight: FontWeight.bold)),
-          Text("124210011", style: GoogleFonts.lexend()),
-          SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                  onPressed: () {
-                    _launcher("https://www.instagram.com/_faizrosyid/");
-                  },
-                  icon: Icon(
-                    Icons.camera_alt,
-                    color: Colors.teal,
-                    size: 32,
-                  )),
-              IconButton(
-                  onPressed: () {
-                    _toggleFavorite();
-                  },
-                  icon: Icon(
-                    (Suka) ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.teal,
-                    size: 32,
-                  )),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
 
 class _menuUtamaFinalState extends State<menuUtamaFinal> {
+  List<Map<String, dynamic>> carouselData = [
+    {
+      "name": "Dinda Dwi Rahmawaty",
+      "imageUrl": "dinda.jpeg",
+      "instagramUrl": "https://www.instagram.com/dinda.drr/",
+      "nim": "124210049",
+      "suka": false
+    },
+    {
+      "name": "Miftakhurokhman",
+      "imageUrl": "mifta.jpg",
+      "instagramUrl": "https://www.instagram.com/miftakhurokhmann/",
+      "nim": "124210058",
+      "suka": false
+    },
+    {
+      "name": "Faiz Rosyid Ma'ruf",
+      "imageUrl": "faiz.jpeg",
+      "instagramUrl": "https://www.instagram.com/_faizrosyid/",
+      "nim": "124210011",
+      "suka": false
+    },
+  ];
+
   int _currentIndex = 0;
   bool tampilanDefault = true;
-  List cardList = [Item1(), Item2(), Item3()];
 
   bool isRunning = false;
   int totalMilliseconds = 0;
@@ -540,7 +290,7 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
                 style: TextStyle(
                   fontFamily: 'Mooli',
                   fontSize: 30,
-                  color: Colors.blue,
+                  color: Colors.teal,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -562,7 +312,9 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
                     });
                   },
                 ),
-                items: cardList.map((card) {
+                items: carouselData.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final data = entry.value;
                   return Builder(builder: (BuildContext context) {
                     return Container(
                       height: MediaQuery.of(context).size.height * 0.30,
@@ -572,7 +324,15 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         color: Colors.white54,
-                        child: card,
+                        child: ItemWidget(
+                          index: index,
+                          name: data["name"],
+                          imageUrl: data["imageUrl"],
+                          instagramUrl: data["instagramUrl"],
+                          nim: data["nim"],
+                          suka: data["suka"],
+                          carouselData: carouselData,
+                        ),
                       ),
                     );
                   });
@@ -586,7 +346,7 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
                 style: TextStyle(
                   fontFamily: 'Mooli',
                   fontSize: 30,
-                  color: Colors.blue,
+                  color: Colors.teal,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -692,10 +452,15 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
                     .map(
                       (index, lapTime) => MapEntry(
                     index,
-                    Text(
-                      'Lap ${lapTimes.length - index}: $lapTime',
-                      // style: GoogleFonts.boogaloo(
-                      //     fontSize: 24.0, color: Colors.green),
+                    Column(
+                      children: [
+                        SizedBox(height: 15,),
+                        Text(
+                          'Lap ${lapTimes.length - index}: $lapTime',
+                          style: GoogleFonts.boogaloo(
+                              fontSize: 18.0, color: Colors.teal),
+                        ),
+                      ],
                     ),
                   ),
                 )
@@ -707,6 +472,7 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Colors.teal,
         currentIndex: 0,
         onTap: (int index) {
           if (index == 0) {}
@@ -720,7 +486,7 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: Colors.teal),
             label: 'Utama',
           ),
           BottomNavigationBarItem(

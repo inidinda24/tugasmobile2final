@@ -63,19 +63,20 @@ class _menuBantuanFinalState extends State<menuBantuanFinal> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Colors.teal,
         currentIndex: 1,
         onTap: (int index) {
           if (index == 0) {
             Navigator.pop(context);
           } else if (index == 1) {}
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Utama',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help),
+            icon: Icon(Icons.help, color: Colors.teal),
             label: 'Bantuan',
           ),
         ],

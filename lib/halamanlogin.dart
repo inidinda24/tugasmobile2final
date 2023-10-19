@@ -67,6 +67,8 @@ class _halamanloginState extends State<halamanlogin> {
                       controller: usernameController,
                       decoration: InputDecoration(
                         labelText: 'Username',
+                        labelStyle:
+                        GoogleFonts.lexend(),
                         floatingLabelStyle:
                             GoogleFonts.lexend(color: Colors.teal),
                         focusedBorder: OutlineInputBorder(
