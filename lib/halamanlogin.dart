@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_mobile2/menuutamafinal.dart';
@@ -32,99 +33,119 @@ class _halamanloginState extends State<halamanlogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 8),
-            Icon(
-              Icons.person_2_rounded,
-              size: 50,
-              color: Colors.teal,
-            ),
-            Text(
-              "Login",
-              style: TextStyle(
-                fontFamily: 'Mooli',
-                fontSize: 30,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("jam.jpg"),
+            fit: BoxFit.cover,
+            repeat: ImageRepeat.repeat,
+          )
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: 8),
+              Icon(
+                Icons.person_2_rounded,
+                size: 50,
                 color: Colors.teal,
-                fontWeight: FontWeight.bold,
               ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              width: 300,
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(10),
+              Text(
+                "Login",
+                style: TextStyle(
+                  fontFamily: 'Mooli',
+                  fontSize: 30,
+                  color: Colors.teal,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: TextFormField(
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        labelText: 'Username',
-                        labelStyle:
-                        GoogleFonts.lexend(),
-                        floatingLabelStyle:
-                            GoogleFonts.lexend(color: Colors.teal),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                            const BorderSide(color: Colors.teal, width: 1),
-                            borderRadius: BorderRadius.circular(25)),
+              SizedBox(height: 20),
+              Container(
+                width: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.teal),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white.withOpacity(0.3),
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: TextFormField(
+                              controller: usernameController,
+                              decoration: InputDecoration(
+                                labelText: 'Username',
+                                labelStyle:
+                                GoogleFonts.lexend(),
+                                floatingLabelStyle:
+                                    GoogleFonts.lexend(color: Colors.teal),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                    const BorderSide(color: Colors.teal, width: 1),
+                                    borderRadius: BorderRadius.circular(25)),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: TextFormField(
+                              obscureText: true,
+                              controller: passwordController,
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                labelStyle:
+                                  GoogleFonts.lexend(),
+                                floatingLabelStyle:
+                                  GoogleFonts.lexend(color: Colors.teal),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                    const BorderSide(color: Colors.teal, width: 1),
+                                    borderRadius: BorderRadius.circular(25)),
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors
+                                  .teal, // Atur warna latar belakang tombol menjadi hijau
+                            ),
+                            onPressed: _login,
+                            child: Text(
+                              'Masuk',
+                              style:GoogleFonts.lexend(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white
+                              )
+                            ),
+                          ),
+                          if (isLoginFailed)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Username atau password salah!',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: TextFormField(
-                      obscureText: true,
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        labelStyle:
-                          GoogleFonts.lexend(),
-                        floatingLabelStyle:
-                          GoogleFonts.lexend(color: Colors.teal),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                            const BorderSide(color: Colors.teal, width: 1),
-                            borderRadius: BorderRadius.circular(25)),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors
-                          .teal, // Atur warna latar belakang tombol menjadi hijau
-                    ),
-                    onPressed: _login,
-                    child: Text(
-                      'Masuk',
-                      style:GoogleFonts.lexend(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      )
-                    ),
-                  ),
-                  if (isLoginFailed)
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Username atau password salah!',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );;

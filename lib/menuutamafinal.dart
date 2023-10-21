@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:tugas_mobile2/halamanlogin.dart';
 import 'package:tugas_mobile2/menubantuanfinal.dart';
@@ -23,7 +24,15 @@ class ItemWidget extends StatefulWidget {
   final bool? suka;
   final List<Map<String, dynamic>> carouselData;
 
-  ItemWidget({required this.index, required this.name, required this.imageUrl, required this.instagramUrl, required this.nim, required this.suka, required this.carouselData,});
+  ItemWidget({
+    required this.index,
+    required this.name,
+    required this.imageUrl,
+    required this.instagramUrl,
+    required this.nim,
+    required this.suka,
+    required this.carouselData,
+  });
 
   @override
   State<ItemWidget> createState() => _ItemWidgetState();
@@ -44,14 +53,21 @@ class _ItemWidgetState extends State<ItemWidget> {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
-              alignment: Alignment.center,
-              content: Text('Anda menyukai ' + widget.name!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "Mooli",
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
+            return BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                alignment: Alignment.center,
+                content: Text(
+                  'Anda menyukai ' + widget.name!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: "Mooli",
+                    color: Colors.teal,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             );
@@ -68,14 +84,21 @@ class _ItemWidgetState extends State<ItemWidget> {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
-              alignment: Alignment.center,
-              content: Text('Anda tidak menyukai ' + widget.name!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "Mooli",
-                  color: Colors.redAccent,
-                  fontWeight: FontWeight.bold,
+            return BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                alignment: Alignment.center,
+                content: Text(
+                  'Anda tidak menyukai ' + widget.name!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: "Mooli",
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             );
@@ -126,8 +149,8 @@ class _ItemWidgetState extends State<ItemWidget> {
           height: 25,
         ),
         Text(widget.name!,
-            style: GoogleFonts.lexend(
-                fontSize: 18, fontWeight: FontWeight.bold)),
+            style:
+                GoogleFonts.lexend(fontSize: 18, fontWeight: FontWeight.bold)),
         Text(widget.nim!, style: GoogleFonts.lexend()),
         SizedBox(
           height: 30,
@@ -150,7 +173,9 @@ class _ItemWidgetState extends State<ItemWidget> {
                 _toggleFavorite();
               },
               icon: Icon(
-                (widget.carouselData[widget.index]["suka"]) ? Icons.favorite : Icons.favorite_border,
+                (widget.carouselData[widget.index]["suka"])
+                    ? Icons.favorite
+                    : Icons.favorite_border,
                 color: Colors.teal,
                 size: 32,
               ),
@@ -161,7 +186,6 @@ class _ItemWidgetState extends State<ItemWidget> {
     );
   }
 }
-
 
 class _menuUtamaFinalState extends State<menuUtamaFinal> {
   List<Map<String, dynamic>> carouselData = [
@@ -236,7 +260,7 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
       isRunning = false;
       lapTimes.clear();
       pausedMilliseconds =
-      0; // Atur pausedMilliseconds kembali ke 0 saat tombol "Reset" ditekan
+          0; // Atur pausedMilliseconds kembali ke 0 saat tombol "Reset" ditekan
     });
   }
 
@@ -273,201 +297,231 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
         title: Text(
           "MyStopwatch",
           style:
-          TextStyle(fontFamily: "Mooli", color: Colors.white, fontSize: 25),
+              TextStyle(fontFamily: "Mooli", color: Colors.white, fontSize: 25),
         ),
         backgroundColor: Colors.teal,
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "Members",
-                style: TextStyle(
-                  fontFamily: 'Mooli',
-                  fontSize: 30,
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
+      body: Container(
+        height: 900,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("jamPutih.jpg"),
+                repeat: ImageRepeat.repeat,
+                fit: BoxFit.fitHeight)),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 15,
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              CarouselSlider(
-                options: CarouselOptions(
-                  height: 300.0,
-                  autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 5),
-                  autoPlayAnimationDuration: Duration(milliseconds: 1000),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  pauseAutoPlayOnTouch: true,
-                  aspectRatio: 2.0,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _currentIndex = index;
+                Text(
+                  "Members",
+                  style: TextStyle(
+                    fontFamily: 'Mooli',
+                    fontSize: 30,
+                    color: Colors.teal,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 300.0,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 5),
+                    autoPlayAnimationDuration: Duration(milliseconds: 1000),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    pauseAutoPlayOnTouch: true,
+                    aspectRatio: 2.0,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                  ),
+                  items: carouselData.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final data = entry.value;
+                    return Builder(builder: (BuildContext context) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height * 0.30,
+                        width: MediaQuery.of(context).size.width,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          color: Colors.white.withOpacity(0.3),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: Colors.teal),
+                                ),
+                                child: ItemWidget(
+                                  index: index,
+                                  name: data["name"],
+                                  imageUrl: data["imageUrl"],
+                                  instagramUrl: data["instagramUrl"],
+                                  nim: data["nim"],
+                                  suka: data["suka"],
+                                  carouselData: carouselData,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
                     });
-                  },
+                  }).toList(),
                 ),
-                items: carouselData.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final data = entry.value;
-                  return Builder(builder: (BuildContext context) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.30,
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  'Stopwatch',
+                  style: TextStyle(
+                    fontFamily: 'Mooli',
+                    fontSize: 30,
+                    color: Colors.teal,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(
+                      width: 330,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            formatTime(totalMilliseconds),
+                            style: GoogleFonts.boogaloo(
+                              fontSize: 48.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ElevatedButton(
+                      onPressed: () {
+                        if (!isRunning) {
+                          startStopTimer();
+                        } else {
+                          pauseTimer();
+                        }
+                      },
+                      child: Container(
+                        width: 80,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(isRunning ? 'Pause' : 'Start',
+                                style: GoogleFonts.lexend(fontSize: 18)),
+                          ],
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        color: Colors.white54,
-                        child: ItemWidget(
-                          index: index,
-                          name: data["name"],
-                          imageUrl: data["imageUrl"],
-                          instagramUrl: data["instagramUrl"],
-                          nim: data["nim"],
-                          suka: data["suka"],
-                          carouselData: carouselData,
+                      ),
+                    ),
+                    SizedBox(width: 5.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        resetTimer();
+                      },
+                      child: Container(
+                        width: 80,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Reset',
+                                style: GoogleFonts.lexend(fontSize: 18)),
+                          ],
                         ),
                       ),
-                    );
-                  });
-                }).toList(),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                'Stopwatch',
-                style: TextStyle(
-                  fontFamily: 'Mooli',
-                  fontSize: 30,
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                width: 330,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      formatTime(totalMilliseconds),
-                      style: GoogleFonts.boogaloo(
-                        fontSize: 48.0,
-                        color: Colors.white,
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 5.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        lapTimer();
+                      },
+                      child: Container(
+                        width: 80,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Lap',
+                                style: GoogleFonts.lexend(fontSize: 18)),
+                          ],
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.teal,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 20.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      if (!isRunning) {
-                        startStopTimer();
-                      } else {
-                        pauseTimer();
-                      }
-                    },
-                    child: Container(
-                      width: 80,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(isRunning ? 'Pause' : 'Start',
-                              style: GoogleFonts.lexend(fontSize: 18)),
-                        ],
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 5.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      resetTimer();
-                    },
-                    child: Container(
-                      width: 80,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Reset', style: GoogleFonts.lexend(fontSize: 18)),
-                        ],
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 5.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      lapTimer();
-                    },
-                    child: Container(
-                      width: 80,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Lap', style: GoogleFonts.lexend(fontSize: 18)),
-                        ],
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.teal,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: lapTimes
-                    .asMap()
-                    .map(
-                      (index, lapTime) => MapEntry(
-                    index,
-                    Column(
-                      children: [
-                        SizedBox(height: 15,),
-                        Text(
-                          'Lap ${lapTimes.length - index}: $lapTime',
-                          style: GoogleFonts.boogaloo(
-                              fontSize: 18.0, color: Colors.teal),
+                Column(
+                  children: lapTimes
+                      .asMap()
+                      .map(
+                        (index, lapTime) => MapEntry(
+                          index,
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                'Lap ${lapTimes.length - index}: $lapTime',
+                                style: GoogleFonts.boogaloo(
+                                    fontSize: 18.0, color: Colors.teal),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                )
-                    .values
-                    .toList(),
-              ),
-            ],
+                      )
+                      .values
+                      .toList(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -475,10 +529,10 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
         fixedColor: Colors.teal,
         currentIndex: 0,
         onTap: (int index) {
-          if (index == 0) {}
-          else if (index == 1) {
+          if (index == 0) {
+          } else if (index == 1) {
             setState(() {
-              Navigator.push(context, MaterialPageRoute(builder: (context){
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return menuBantuanFinal();
               }));
             });
