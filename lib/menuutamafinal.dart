@@ -294,6 +294,7 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "MyStopwatch",
           style:
