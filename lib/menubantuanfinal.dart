@@ -38,7 +38,7 @@ class _menuBantuanFinalState extends State<menuBantuanFinal> {
         height: 900,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("jamPutih.jpg"),
+                image: AssetImage("assets/jamPutih.jpg"),
                 repeat: ImageRepeat.repeat,
                 fit: BoxFit.fitHeight)),
         child: BackdropFilter(

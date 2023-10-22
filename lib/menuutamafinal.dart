@@ -191,21 +191,21 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
   List<Map<String, dynamic>> carouselData = [
     {
       "name": "Dinda Dwi Rahmawaty",
-      "imageUrl": "dinda.jpeg",
+      "imageUrl": "assets/dinda.jpeg",
       "instagramUrl": "https://www.instagram.com/dinda.drr/",
       "nim": "124210049",
       "suka": false
     },
     {
       "name": "Miftakhurokhman",
-      "imageUrl": "mifta.jpg",
+      "imageUrl": "assets/mifta.jpg",
       "instagramUrl": "https://www.instagram.com/miftakhurokhmann/",
       "nim": "124210058",
       "suka": false
     },
     {
       "name": "Faiz Rosyid Ma'ruf",
-      "imageUrl": "faiz.jpeg",
+      "imageUrl": "assets/faiz.jpeg",
       "instagramUrl": "https://www.instagram.com/_faizrosyid/",
       "nim": "124210011",
       "suka": false
@@ -306,7 +306,7 @@ class _menuUtamaFinalState extends State<menuUtamaFinal> {
         height: 900,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("jamPutih.jpg"),
+                image: AssetImage("assets/jamPutih.jpg"),
                 repeat: ImageRepeat.repeat,
                 fit: BoxFit.fitHeight)),
         child: SingleChildScrollView(

@@ -36,7 +36,7 @@ class _halamanloginState extends State<halamanlogin> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("jam.jpg"),
+            image: AssetImage("assets/jam.jpg"),
             fit: BoxFit.cover,
             repeat: ImageRepeat.repeat,
           )
